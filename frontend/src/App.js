@@ -4,7 +4,7 @@ import Footer from "./Components/Footer"
 import CustomBakery from "./Components/CustomBakery"
 import CartModal from "./Components/CartModal"
 import { Link, BrowserRouter as Router, Route } from "react-router-dom"
-import { Container } from "@mui/material"
+import { Container, Grid, Box } from "@mui/material"
 import { Component } from "react";
 
 export default class App extends Component {
@@ -26,13 +26,21 @@ export default class App extends Component {
   render() {
     return (
       <Router>
-        <div className="Container">
-          <Header handleOpen={this.handleOpen} updateCart={this.updateCart} />
+        <Grid id="main" container spacing={0} direction="column" justifyContent="center" alignItems="stretch">
+          <Grid item xs={0}>
+            <Header handleOpen={this.handleOpen} updateCart={this.updateCart} />
+          </Grid>
           <CartModal handleClose={this.handleClose} open={this.state.modalState} />
-          <Route path="/" exact component={LandingPage} updateCart={this.updateCart} />
-          <Route path="/custombakery" component={CustomBakery} updateCart={this.updateCart} />
-          <Footer className="footer" />
-        </div>
+          <Grid item xs={9}>
+            <Box sx={{ width: "100%", height: "100%",display: "flex", justifyContent: "center", alignItems: "center" }}>
+              <Route path="/" exact component={LandingPage} updateCart={this.updateCart} />
+              <Route path="/custombakery" component={CustomBakery} updateCart={this.updateCart} />
+            </Box>
+          </Grid>
+          <Grid item xs={0}>
+            <Footer className="footer" />
+          </Grid>
+        </Grid>
       </Router>
     )
   }
